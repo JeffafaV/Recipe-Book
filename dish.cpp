@@ -33,7 +33,7 @@ class Dish
 	
 };
 */
-
+// not sure if I should even be doing classes
 Ingredient::Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<string> d_i_i)
 {
 	current_ingr_names = c_i_n;
@@ -41,6 +41,8 @@ Ingredient::Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<string
 	database_ingr_index = d_i_i;
 }
 
+// all current ingredients were stored in a vector in main function
+// this function displays each current available ingredient
 void Ingredient::current_ingr(vector<string> c_i_n)
 {
 	if (c_i_n.size() != 0)
@@ -56,6 +58,8 @@ void Ingredient::current_ingr(vector<string> c_i_n)
 	}
 }
 
+// adds an ingredient to the currently available ingredient vector and text file
+// the ingredient is appended in the text file and pushed back in the vector
 void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 {
 	ofstream outfile;
@@ -65,6 +69,11 @@ void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 	outfile.close();
 }
 
+// deletes an ingredient from the currently available ingredient vector and text file
+// the available ingredients are first stored in a temporary vector except for the ingredient that is being deleted
+// the original vector is cleared of its elements and then copies the temporary vector's elements
+// the available ingredient text file is truncated and is filled with the original vector's elements
+// I think I can do this with just one fstream instead of using both ifstream and ofstream
 void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 {
 	ifstream infile("data.txt");
@@ -101,14 +110,15 @@ void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 int main()
 {
 	//Ingredient list;
-	vector<string> names;
-	vector<string> b;
-	vector<string> c;
+	vector<string> names; // test
+	vector<string> b; // dummy
+	vector<string> c; // dummy
 	Ingredient list = Ingredient(names, b, c);
 	string name;
 	//list(names, b , c);
 	ifstream infile("data.txt");
 	
+	// maybe change to getline
 	while (infile >> name)
 	{
 		names.push_back(name);
@@ -133,7 +143,7 @@ int main()
 			}
 			case 2:
 			{
-			    cin.ignore();
+			    cin.ignore(); // have to clear the buffer first or else getline will not take input
 			    string add;
 			    getline(cin, add);
 				list.current_add(names, add);

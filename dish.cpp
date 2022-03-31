@@ -64,7 +64,7 @@ void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 {
 	ofstream outfile;
 	outfile.open("data.txt", ofstream::app);
-	outfile << endl << a_ingr;
+	outfile << a_ingr << endl;
 	c_i_n.push_back(a_ingr);
 	outfile.close();
 }
@@ -119,7 +119,7 @@ int main()
 	ifstream infile("data.txt");
 	
 	// maybe change to getline
-	while (infile >> name)
+	while (getline(infile, name))
 	{
 		names.push_back(name);
 	}

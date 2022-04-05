@@ -88,6 +88,12 @@ void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 		}
 	}
 	
+	if (c_i_n == temp)
+	{
+	    cout << "Ingredient does not exist" << endl;
+	    return;
+	}
+	
 	c_i_n.clear();
 	for (int i = 0; i < temp.size(); i++)
 	{

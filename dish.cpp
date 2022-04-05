@@ -62,6 +62,15 @@ void Ingredient::current_ingr(vector<string> c_i_n)
 // the ingredient is appended in the text file and pushed back in the vector
 void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 {
+	for (int i = 0; i < c_i_n.size(); i++)
+    {
+        if (c_i_n[i] == a_ingr)
+        {
+            cout << "Ingredient already exists" << endl;
+            return;
+        }
+    }
+	
 	ofstream outfile;
 	outfile.open("data.txt", ofstream::app);
 	outfile << a_ingr << endl;

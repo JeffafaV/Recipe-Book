@@ -7,20 +7,20 @@ using namespace std;
 class Ingredient
 {
 	public:
-	Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<string> d_i_i); // constructor
+	Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<int> d_i_i); // constructor
 	void current_ingr(vector<string> c_i_n); // display all current available ingredients
 	void current_add(vector<string> &c_i_n, string a_ingr); // add ingredient to current available ingredients
 	void current_del(vector<string> &c_i_n, string d_ingr); // delete ingredient from current available ingredients
 	
-	/*
-	void all_ingr(string ingr); // display all ingredients in database
-	void add_ingr(string ingr); // add ingredient to database
-	void del_ingr(string ingr); // delete ingredient from database
-	void update_ingr(string ingr); // update ingredients and their index in database
-	*/
+	
+	void all_ingr(vector<string> &d_i_n); // display all ingredients in database
+	void add_ingr(vector<string> &d_i_n, vector<int> &d_i_i, string a_ingr); // add ingredient to database
+	//void del_ingr(string ingr); // delete ingredient from database
+	//void update_ingr(string ingr); // update ingredients and their index in database
+	
 	private:
 	vector<string> database_ingr_names; // parallel vector of all ingredients in database txt file
-	vector<string> database_ingr_index; // parallel vector of all indexes of ingredients in database txt file
+	vector<int> database_ingr_index; // parallel vector of all indexes of ingredients in database txt file
 	vector<string> current_ingr_names; // vector of all ingredients in current available ingredient txt file
 };
 
@@ -34,7 +34,7 @@ class Dish
 };
 */
 // not sure if I should even be doing classes
-Ingredient::Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<string> d_i_i)
+Ingredient::Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<int> d_i_i)
 {
 	current_ingr_names = c_i_n;
 	database_ingr_names = d_i_n;
@@ -122,12 +122,58 @@ void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 	outfile.close();
 }
 
+void Ingredient::all_ingr(vector<string> &d_i_n)
+{
+	ifstream infile("data2.txt");
+	string temp;
+	
+	while (getline(infile, temp))
+	{
+		d_i_n.push_back(temp.substr(0, temp.find_first_of(":")));
+	}
+	
+	for (int i = 0; i < d_i_n.size(); i++)
+	{
+		cout << d_i_n[i] << endl;
+	}
+}
+
+void Ingredient::add_ingr(vector<string> &d_i_n, vector<int> &d_i_i, string a_ingr)
+{
+	for (int i = 0; i < d_i_n.size(); i++)
+    {
+        if (d_i_n[i] == a_ingr)
+        {
+            cout << "Ingredient already exists" << endl;
+            return;
+        }
+    }
+	
+	ofstream outfile;
+	outfile.open("data2.txt", ofstream::app);
+	
+	if(d_i_i.empty() == true)
+	{
+		outfile << a_ingr << ":" << 1 << endl;
+		d_i_n.push_back(a_ingr);
+		d_i_i.push_back(1);
+	}
+	else
+	{
+		outfile << a_ingr << ":" << d_i_i[d_i_i.size()]+1 << endl;
+		d_i_n.push_back(a_ingr);
+		d_i_i.push_back(d_i_i[d_i_i.size()-1]+1);
+	}
+	
+	outfile.close();
+}
+
 int main()
 {
 	//Ingredient list;
 	vector<string> names; // test
 	vector<string> b; // dummy
-	vector<string> c; // dummy
+	vector<int> c; // dummy
 	Ingredient list = Ingredient(names, b, c);
 	string name;
 	//list(names, b , c);
@@ -147,6 +193,8 @@ int main()
 		cout << "Press 1 to view current available ingredients" << endl;
 		cout << "Press 2 to add a new available ingredient" << endl;
 		cout << "Press 3 to delete an ingredient" << endl;
+		cout << "Press 4 to view ingredient database" << endl;
+		cout << "Press 5 to add entry in ingredient database" << endl;
 		cin >> choice;
 		
 		switch(choice)
@@ -170,6 +218,19 @@ int main()
 				string del;
 				getline(cin, del);
 				list.current_del(names, del);
+				break;
+			}
+			case 4:
+			{
+				list.all_ingr(b);
+				break;
+			}
+			case 5:
+			{
+				cin.ignore();
+				string add_to_d;
+				getline(cin, add_to_d);
+				list.add_ingr(b,c,add_to_d);
 				break;
 			}
 			default:

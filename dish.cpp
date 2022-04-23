@@ -124,6 +124,7 @@ void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 
 void Ingredient::all_ingr(vector<string> &d_i_n)
 {
+	/*
 	ifstream infile("data2.txt");
 	string temp;
 	
@@ -131,7 +132,7 @@ void Ingredient::all_ingr(vector<string> &d_i_n)
 	{
 		d_i_n.push_back(temp.substr(0, temp.find_first_of(":")));
 	}
-	
+	*/
 	for (int i = 0; i < d_i_n.size(); i++)
 	{
 		cout << d_i_n[i] << endl;
@@ -151,18 +152,18 @@ void Ingredient::add_ingr(vector<string> &d_i_n, vector<int> &d_i_i, string a_in
 	
 	ofstream outfile;
 	outfile.open("data2.txt", ofstream::app);
-	
+	//cout << d_i_i.size();
 	if(d_i_i.empty() == true)
 	{
-		outfile << a_ingr << ":" << 1 << endl;
+		outfile << a_ingr << ":" << 0 << endl;
 		d_i_n.push_back(a_ingr);
-		d_i_i.push_back(1);
+		d_i_i.push_back(0);
 	}
 	else
 	{
-		outfile << a_ingr << ":" << d_i_i[d_i_i.size()]+1 << endl;
+		outfile << a_ingr << ":" << d_i_i.size() << endl;
 		d_i_n.push_back(a_ingr);
-		d_i_i.push_back(d_i_i[d_i_i.size()-1]+1);
+		d_i_i.push_back(d_i_i.size());
 	}
 	
 	outfile.close();
@@ -172,9 +173,9 @@ int main()
 {
 	//Ingredient list;
 	vector<string> names; // test
-	vector<string> b; // dummy
+	vector<string> base_names; // dummy
 	vector<int> c; // dummy
-	Ingredient list = Ingredient(names, b, c);
+	Ingredient list = Ingredient(names, base_names, c);
 	string name;
 	//list(names, b , c);
 	ifstream infile("data.txt");
@@ -183,6 +184,14 @@ int main()
 	while (getline(infile, name))
 	{
 		names.push_back(name);
+	}
+	
+	ifstream infile_2("data2.txt");
+	string base_name;
+	
+	while (getline(infile_2, base_name))
+	{
+		base_names.push_back(base_name.substr(0, base_name.find_first_of(":")));
 	}
 	
 	bool exit = false;
@@ -222,7 +231,7 @@ int main()
 			}
 			case 4:
 			{
-				list.all_ingr(b);
+				list.all_ingr(base_names);
 				break;
 			}
 			case 5:
@@ -230,7 +239,7 @@ int main()
 				cin.ignore();
 				string add_to_d;
 				getline(cin, add_to_d);
-				list.add_ingr(b,c,add_to_d);
+				list.add_ingr(base_names,c,add_to_d);
 				break;
 			}
 			default:

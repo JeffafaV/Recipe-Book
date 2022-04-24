@@ -9,9 +9,8 @@ class Ingredient
 	public:
 	Ingredient(vector<string> c_i_n, vector<string> d_i_n, vector<int> d_i_i); // constructor
 	void current_ingr(vector<string> c_i_n); // display all current available ingredients
-	void current_add(vector<string> &c_i_n, string a_ingr); // add ingredient to current available ingredients
+	void current_add(vector<string> &c_i_n, vector<string> &d_i_n, vector<int> &d_i_i, string a_ingr); // add ingredient to current available ingredients
 	void current_del(vector<string> &c_i_n, string d_ingr); // delete ingredient from current available ingredients
-	
 	
 	void all_ingr(vector<string> &d_i_n); // display all ingredients in database
 	void add_ingr(vector<string> &d_i_n, vector<int> &d_i_i, string a_ingr); // add ingredient to database
@@ -60,7 +59,8 @@ void Ingredient::current_ingr(vector<string> c_i_n)
 
 // adds an ingredient to the currently available ingredient vector and text file
 // the ingredient is appended in the text file and pushed back in the vector
-void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
+// if added ingredient is not in the database then it is added
+void Ingredient::current_add(vector<string> &c_i_n, vector<string> &d_i_n, vector<int> &d_i_i, string a_ingr)
 {
 	for (int i = 0; i < c_i_n.size(); i++)
     {
@@ -76,6 +76,18 @@ void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 	outfile << a_ingr << endl;
 	c_i_n.push_back(a_ingr);
 	outfile.close();
+	
+	// checks if added ingredient is in ingredient data base
+	for (int i = 0; i < d_i_n.size(); i++)
+	{
+		if (d_i_n[i] == a_ingr) // returns if a_ingr is found in data base
+		{
+			return;
+		}
+	}
+	
+	// adds a_ingr to database
+	add_ingr(d_i_n, d_i_i, a_ingr);
 }
 
 // deletes an ingredient from the currently available ingredient vector and text file
@@ -85,38 +97,30 @@ void Ingredient::current_add(vector<string> &c_i_n, string a_ingr)
 // I think I can do this with just one fstream instead of using both ifstream and ofstream
 void Ingredient::current_del(vector<string> &c_i_n, string d_ingr)
 {
-	ifstream infile("data.txt");
-	string name;
-	vector<string> temp;
+	int i;
 	
-	while (infile >> name)
+	for (i = 0; i < c_i_n.size(); i++)
 	{
-		if(name != d_ingr)
+		if (c_i_n[i] == d_ingr)
 		{
-			temp.push_back(name);
+			cout << "Element found at index " << i << endl;
+			c_i_n.erase(c_i_n.begin()+i);
+			break;
 		}
 	}
-	
-	if (c_i_n == temp)
+	cout << i << " " << c_i_n.size() << endl;
+	if (i > c_i_n.size())
 	{
-	    cout << "Ingredient does not exist" << endl;
-	    return;
+		cout << "Ingredient does not exist" << endl;
+		return;
 	}
-	
-	c_i_n.clear();
-	for (int i = 0; i < temp.size(); i++)
-	{
-		c_i_n.push_back(temp[i]);
-	}
-	
-	infile.close();
 	
 	ofstream outfile;
 	outfile.open("data.txt", ofstream::trunc);
 	
-	for (int i = 0; i < c_i_n.size(); i++)
+	for (int j = 0; j < c_i_n.size(); j++)
 	{
-		outfile << c_i_n[i] << endl;
+		outfile << c_i_n[j] << endl;
 	}
 	
 	outfile.close();
@@ -153,12 +157,14 @@ void Ingredient::add_ingr(vector<string> &d_i_n, vector<int> &d_i_i, string a_in
 	ofstream outfile;
 	outfile.open("data2.txt", ofstream::app);
 	//cout << d_i_i.size();
+	/*
 	if(d_i_i.empty() == true)
 	{
 		outfile << a_ingr << ":" << 0 << endl;
 		d_i_n.push_back(a_ingr);
 		d_i_i.push_back(0);
 	}
+	*/
 	else
 	{
 		outfile << a_ingr << ":" << d_i_i.size() << endl;
@@ -173,7 +179,7 @@ int main()
 {
 	//Ingredient list;
 	vector<string> names; // test
-	vector<string> base_names; // dummy
+	vector<string> base_names; // test
 	vector<int> c; // dummy
 	Ingredient list = Ingredient(names, base_names, c);
 	string name;
@@ -218,7 +224,7 @@ int main()
 			    cin.ignore(); // have to clear the buffer first or else getline will not take input
 			    string add;
 			    getline(cin, add);
-				list.current_add(names, add);
+				list.current_add(names, base_names, c, add);
 				break;
 			}
 			case 3:

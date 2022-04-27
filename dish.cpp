@@ -14,6 +14,7 @@ class Ingredient
 	void set_db_index();
 	
 	void add_cur_names(string new_name);
+	void add_db_names_index(string new_name);
     
     vector<string> get_cur_names();
 	vector<string> get_db_names();
@@ -108,17 +109,33 @@ void Ingredient::add_cur_names(string new_name)
 	set_cur_names();
 }
 
+void Ingredient::add_db_names_index(string new_name)
+{
+	for (int i = 0; i < db_names.size(); i++)
+	{
+		if (db_names[i] == new_name)
+		{
+			cout << "Ingredient already exists" << endl;
+			return;
+		}
+	}
+	
+	ofstream outfile;
+	outfile.open("data2.txt", ofstream::app);
+	outfile << new_name << ":" << db_index.size() << endl;
+	outfile.close();
+	set_db_names();
+	set_db_index();
+}
+
 int main()
 {
     Ingredient in = Ingredient();
     in.set_cur_names();
+	in.set_db_names();
+	in.set_db_index();
 
     vector<string> list = in.get_cur_names();
-    
-    for (int i = 0; i < list.size(); i++)
-    {
-        cout << list[i] << endl;
-    }
     
 	cout << endl << "Testing adding function" << endl;
 	in.add_cur_names("egg");
@@ -128,4 +145,19 @@ int main()
 	{
 		cout << list[i] << endl;
 	}
+	
+	vector<string> db_str = in.get_db_names();
+	vector<int> db_int = in.get_db_index();
+	
+	cout << endl << "Testing db add function" << endl;
+	in.add_db_names_index("sugar");
+	db_str = in.get_db_names();
+	db_int = in.get_db_index();
+	
+	for (int i = 0; i < db_str.size(); i++)
+	{
+		cout << db_str[i] << ":" << db_int[i] << endl;
+	}
+	
+	return 0;
 }

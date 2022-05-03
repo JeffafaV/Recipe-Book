@@ -10,7 +10,7 @@ class Ingredient
 	Ingredient();
     
 	void display(vector<string> v); // displays vector
-    void set_cur_names(); // sets the cur_names vector to the names in the current ingredient file
+	void set_cur_names(); // sets the cur_names vector to the names in the current ingredient file
 	void set_db_names(); // sets the db_names vector to the names in the ingredient database file
 	void set_db_index(); // sets the db_index vector to the indeces of the names in the ingredient database file
 	

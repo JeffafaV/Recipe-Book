@@ -10,7 +10,7 @@ class Ingredient
 	Ingredient();
     
 	void display(vector<string> v); // displays vector
-	void set_cur_names(); // sets the cur_names vector to the names in the current ingredient file
+    void set_cur_names(); // sets the cur_names vector to the names in the current ingredient file
 	void set_db_names(); // sets the db_names vector to the names in the ingredient database file
 	void set_db_index(); // sets the db_index vector to the indeces of the names in the ingredient database file
 	
@@ -134,10 +134,42 @@ void Ingredient::add_db_names_index(string new_name)
 		}
 	}
 	
+	vector<string> temp_n = get_db_names;
+	vector<int> temp_i = get_db_index;
+	
 	// adds ingredient to the ingredient database and then sets its corresponding vectors
 	ofstream outfile;
-	outfile.open("data2.txt", ofstream::app);
-	outfile << new_name << ":" << db_index.size() << endl;
+	outfile.open("data2.txt", ofstream::trunc);
+	
+	bool was_cont = true; // true if [1...n]
+	
+	int j;
+	for (j = 0; j < temp_i.size()-1; j++)
+	{
+		if (j+1 != temp_i[j])
+		{
+			was_cont = false;
+			break;
+			
+		}
+	}
+	
+	if (was_cont == true)
+	{
+		temp_n.push_back(new_name);
+		temp_i.push_back(temp_i.size()+1);
+	}
+	else
+	{
+		temp_n.insert(temp_n.begin()+j, new_name);
+		temp_i.insert(temp_i.begin()+j, j+1);
+	}
+	
+	for (int k = 0; k < db_name.size(); k++)
+	{
+		outfile << db_name[k] << ":" << db_index[k] << endl;
+	}
+	
 	outfile.close();
 	set_db_names();
 	set_db_index();
@@ -154,7 +186,7 @@ void Ingredient::del_cur_names(string del_name)
 		if (temp[i] == del_name)
 		{
 			// delete item and return
-			temp.erase(temp.begin() + i); // temp.erase(temp.begin()+1)
+			temp.erase(temp.begin() + i);
 			break;
 		}
 	}
@@ -181,34 +213,36 @@ void Ingredient::del_cur_names(string del_name)
 
 void Ingredient::del_db_names_index(string del_name) // call del_cur_names
 {
-	// create a temporary vector to modify
-	vector<string> temp = get_db_names();
+	// create temporary vectors to modify
+	vector<string> temp_n = get_db_names();
+	vector<int> temp_i = get_db_index();
 	
 	//int i;
-	for (int i = 0; i < temp.size(); i++)
+	for (int i = 0; i < temp_n.size(); i++)
 	{
-		if (temp[i] == del_name)
+		if (temp_n[i] == del_name)
 		{
 			// delete item and return
-			temp.erase(temp.begin() + i); // temp.erase(temp.begin()+1)
+			temp_n.erase(temp_n.begin() + i);
+			temp_i.erase(temp_i.begin() + i);
 			break;
 		}
 	}
 	
 	// checks if ingredient doesn't exist
-	if (temp == db_names) // i > temp.size()
+	if (temp_n == db_names) // i > temp.size()
 	{
 		cout << "Ingredient does not exist in the ingredient database" << endl;
 		return;
 	}
 	
-	// rewrites the current ingredient list with the temporary vector which doesn't include the deleted ingredient and then sets its corresponding vectors
+	// rewrites the ingredient database with the temporary vectors which doesn't include the deleted ingredient and then sets its corresponding vectors
 	ofstream outfile;
 	outfile.open("data2.txt", ofstream::trunc);
 	
-	for (int j = 0; j < temp.size(); j++)
+	for (int j = 0; j < temp_n.size(); j++)
 	{
-		outfile << temp[j] << ":" << j+1 << endl; // it's resetting the index of each ingredient instead of giving the ingredient its original index. Need to fix that.
+		outfile << temp_n[j] << ":" << temp_i[j] << endl;
 	}
 	
 	outfile.close();

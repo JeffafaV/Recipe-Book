@@ -102,7 +102,7 @@ vector<int> Ingredient::get_db_index()
 	return db_index;
 }
 
-void Ingredient::add_cur_names(string new_name)
+void Ingredient::add_cur_names(string new_name) // should call add_db_names_index
 {
 	// checks if ingredient already exists
 	for (int i = 0; i < cur_names.size(); i++)
@@ -134,8 +134,8 @@ void Ingredient::add_db_names_index(string new_name)
 		}
 	}
 	
-	vector<string> temp_n = get_db_names;
-	vector<int> temp_i = get_db_index;
+	vector<string> temp_n = get_db_names();
+	vector<int> temp_i = get_db_index();
 	
 	// adds ingredient to the ingredient database and then sets its corresponding vectors
 	ofstream outfile;
@@ -165,9 +165,9 @@ void Ingredient::add_db_names_index(string new_name)
 		temp_i.insert(temp_i.begin()+j, j+1);
 	}
 	
-	for (int k = 0; k < db_name.size(); k++)
+	for (int k = 0; k < db_names.size(); k++)
 	{
-		outfile << db_name[k] << ":" << db_index[k] << endl;
+		outfile << db_names[k] << ":" << db_index[k] << endl;
 	}
 	
 	outfile.close();
@@ -211,7 +211,7 @@ void Ingredient::del_cur_names(string del_name)
 	set_cur_names();
 }
 
-void Ingredient::del_db_names_index(string del_name) // call del_cur_names
+void Ingredient::del_db_names_index(string del_name)
 {
 	// create temporary vectors to modify
 	vector<string> temp_n = get_db_names();

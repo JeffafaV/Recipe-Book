@@ -305,12 +305,13 @@ int main()
 	
 	while (exit == false)
 	{
-		cout << "Press 1 to view current available ingredients" << endl;
-		cout << "Press 2 to add a new available ingredient" << endl;
-		cout << "Press 3 to delete an ingredient" << endl;
+		cout << "Press 1 to view currently available ingredients" << endl;
+		cout << "Press 2 to add a new ingredient to the currently available ingredient list" << endl;
+		cout << "Press 3 to delete an ingredient from the currently available ingredient list" << endl;
 		cout << "Press 4 to view ingredient database" << endl;
-		cout << "Press 5 to add entry in ingredient database" << endl;
-		cout << "Press 6 to view dish database" << endl;
+		cout << "Press 5 to add an ingredient to the ingredient database" << endl;
+		cout << "Press 6 to delete an ingredient from the ingredient database" << endl;
+		cout << "Press 7 to view dish database" << endl;
 		getline(cin, choice);
 		
 		switch (stoi(choice))
@@ -347,6 +348,13 @@ int main()
 				break;
 			}
 			case 6:
+			{
+				cout << "Enter the ingredient you want to delete from the ingredient database:" << endl;
+				getline(cin, ingr);
+				in.del_db_names_index(ingr);
+				break;
+			}
+			case 7:
 			{
 				vector<string> list = di.get_dish_names();
 				for (int i = 0; i < list.size(); i++)

@@ -21,7 +21,7 @@ CurrentIngredients::CurrentIngredients()
 		
 		while (getline(readfile, ingr))
 		{
-			curr_ingr.push_back(ingr);
+			currIngr.push_back(ingr);
 		}
 		
 		readfile.close();
@@ -30,18 +30,17 @@ CurrentIngredients::CurrentIngredients()
 	file.close();
 }
 
-void CurrentIngredients::addCIngr()
+void CurrentIngredients::addCIngr(string ingr)
 {
 	
 }
 
-
-void CurrentIngredients::delCIngr()
+void CurrentIngredients::delCIngr(string ingr)
 {
 	
 }
 
-void CurrentIngredients::viewCIngr()
+void CurrentIngredients::viewCIngr(string ingr)
 {
 	
 }

@@ -2,20 +2,21 @@
 #define CURRENT_INGREDIENTS_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
 class CurrentIngredients
 {
 	private:
-	vector<int> currIngr;
+	vector<string> currIngr;
 	void syncCIngr();
 	
 	public:
 	CurrentIngredients();
-	void addCIngr();
-	void delCIngr();
-	void viewCIngr();
+	void addCIngr(string ingr);
+	void delCIngr(string ingr);
+	void viewCIngr(string ingr);
 };
 
 #endif

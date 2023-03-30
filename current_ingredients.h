@@ -8,7 +8,7 @@ using namespace std;
 class CurrentIngredients
 {
 	private:
-	vector<int> curr_ingr;
+	vector<int> currIngr;
 	void syncCIngr();
 	
 	public:

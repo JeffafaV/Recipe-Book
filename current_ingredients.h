@@ -16,7 +16,7 @@ class CurrentIngredients
 	CurrentIngredients();
 	void addCIngr(string ingr);
 	void delCIngr(string ingr);
-	void viewCIngr(string ingr);
+	void viewCIngr();
 };
 
 #endif

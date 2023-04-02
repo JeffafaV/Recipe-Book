@@ -32,17 +32,43 @@ CurrentIngredients::CurrentIngredients()
 
 void CurrentIngredients::addCIngr(string ingr)
 {
+	for (int i = 0; i < currIngr.size(); i++)
+	{
+		if (currIngr[i] == ingr)
+		{
+			cout << "Ingredient already exists" << endl;
+			
+			return;
+		}
+	}
 	
+	currIngr.push_back(ingr);
+	syncCIngr();
 }
 
 void CurrentIngredients::delCIngr(string ingr)
 {
+	for (int i = 0; i < currIngr.size(); i++)
+	{
+		if (currIngr[i] == ingr)
+		{
+			currIngr.erase(currIngr.begin()+i);
+			syncCIngr();
+			return;
+		}
+	}
 	
+	cout << "Ingredient doesn't exist" << endl;
 }
 
-void CurrentIngredients::viewCIngr(string ingr)
+void CurrentIngredients::viewCIngr()
 {
+	cout << "List of currently available ingredients:" << endl;
 	
+	for (int i = 0; i < currIngr.size(); i++)
+	{
+		cout << currIngr[i] << endl;
+	}
 }
 
 void CurrentIngredients::syncCIngr()

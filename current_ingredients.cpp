@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include "current_ingredients.h"
 
 using namespace std;
 
@@ -73,5 +74,13 @@ void CurrentIngredients::viewCIngr()
 
 void CurrentIngredients::syncCIngr()
 {
+	ofstream outfile;
+	outfile.open("current_ingredients.txt", ofstream::trunc);
 	
+	for (int i = 0; i < currIngr.size(); i++)
+	{
+		outfile << currIngr[i] << endl;
+	}
+	
+	outfile.close();
 }

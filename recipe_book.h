@@ -12,28 +12,26 @@ class RecipeBook
 	struct Dish
 	{
 		string dishName;
-		vector<string> dishIngr;
+		vector<string> dishIngrs;
 		string dishDesc;
 		Dish *next;
 		
-		Dish(string name) : dishName(name), next(NULL) {}
+		Dish(string name, vector<string> ingrs, string desc) : dishName(name), dishIngrs(ingrs), dishDesc(desc), next(NULL) {}
 	};
 	
 	int size;
 	Dish *head;
 	Dish *tail;
-	void syncRBook;
+	void syncRBook();
 	
 	public:
 	RecipeBook();
 	~RecipeBook();
-	void addDishName(int index, string name);
-	void addDishIngr(int index, vector<string> ingr);
-	void addDishDesc(int index, string desc);
-	void edtDishName(int index, string name);
-	void edtDishIngr(int index, vector<string> ingr);
-	void edtDishDesc(int index, string desc);
-	void delDish(int index);
+	void addDish(string dish, vector<string> ingrs, string desc);
+	void edtDishName(string dish, string newName);
+	void edtDishIngr(string dish, vector<string> ingrs);
+	void edtDishDesc(string dish, string desc);
+	void delDish(string dish);
 };
 
 #endif

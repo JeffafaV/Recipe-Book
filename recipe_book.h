@@ -32,6 +32,8 @@ class RecipeBook
 	void edtDishIngr(string dish, vector<string> ingrs);
 	void edtDishDesc(string dish, string desc);
 	void delDish(string dish);
+	void viewDishDetails(string dish);
+	void viewAllDishes();
 };
 
 #endif

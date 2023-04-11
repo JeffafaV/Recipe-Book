@@ -74,7 +74,7 @@ RecipeBook::RecipeBook()
 			
 			// cuts the dish ingredients from the the dish data
 			dishData = dishData.substr(asteriskPos+1);
-			// remaining data is the dish description
+			// stores the remaining third section (dish description) in the node
 			t->dishDesc = dishData;
 			
 			t->next = NULL;
@@ -139,11 +139,26 @@ void RecipeBook::delDish(string dish)
 
 void RecipeBook::syncRBook()
 {
+	ofstream outfile;
+	outfile.open("recipe_book.txt", ofstream::trunc);
+	
 	Dish *t = head;
 	
 	while (t != NULL)
 	{
+		outfile << t->dishName << "*";
 		
+		for (int i = 0; i < t->dishIngrs.size(); i++)
+		{
+			outfile << t->dishIngrs[i] << ",";
+		}
+		
+		outfile << "*" << t->dishDesc << endl;
+		
+		t = t->next;
+	}
+	
+	outfile.close();
 }
 
 void RecipeBook:viewDishDetails(string dish)

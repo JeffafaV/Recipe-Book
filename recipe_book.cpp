@@ -114,7 +114,40 @@ RecipeBook::~RecipeBook()
 
 void RecipeBook::addDish(string dish, vector<string> ingrs, string desc)
 {
+	Dish *t = head;
 	
+	while (t != NULL)
+	{
+		if (t->dishName == dish)
+		{
+			cout << "Dish already exists" << endl;
+			return;
+		}
+	}
+	
+	Dish *newDish = new Dish(dish, ingrs, desc);
+	
+	// when the heap is full it sets the pointer that tries to allocate memory to null
+	/*
+	if (newDish == NULL)
+	{
+		cout << "No more memory left to store" << endl;
+		return;
+	}
+	*/
+	
+	if (tail == NULL)
+	{
+		head = t;
+		tail = t;
+	}
+	else
+	{
+		tail->next = t;
+		tail = t;
+	}
+	
+	size++;
 }
 
 void RecipeBook::edtDishName(string dish, string newName)

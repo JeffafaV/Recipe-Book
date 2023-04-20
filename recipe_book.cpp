@@ -128,13 +128,11 @@ void RecipeBook::addDish(string dish, vector<string> ingrs, string desc)
 	Dish *newDish = new Dish(dish, ingrs, desc);
 	
 	// when the heap is full it sets the pointer that tries to allocate memory to null
-	/*
 	if (newDish == NULL)
 	{
-		cout << "No more memory left to store" << endl;
+		cout << "No more memory left to store dish" << endl;
 		return;
 	}
-	*/
 	
 	if (tail == NULL)
 	{
@@ -148,6 +146,7 @@ void RecipeBook::addDish(string dish, vector<string> ingrs, string desc)
 	}
 	
 	size++;
+	syncRBook();
 }
 
 void RecipeBook::edtDishName(string dish, string newName)
@@ -167,7 +166,50 @@ void RecipeBook::edtDishDesc(string dish, string desc)
 
 void RecipeBook::delDish(string dish)
 {
+	Dish *t1 = head;
+	Dish *t2 = NULL;
+	int index = -1;
 	
+	while (t1 != NULL)
+	{
+		index++;
+		
+		if (t1->dishName == dish)
+		{
+			if (index > 0)
+			{
+				t2->next = t1->next;
+				delete t1;
+				t1 = NULL;
+				
+				if (index == size-1)
+				{
+					tail = t2;
+				}
+			}
+			else
+			{
+				Dish *initial = head;
+				head = head->next;
+				
+				if (initial == tail)
+				{
+					tail = head;
+				}
+				
+				delete initial;
+			}
+			
+			size--;
+			syncRBook();
+			return;
+		}
+		
+		t2 = t1;
+		t1 = t1->next;
+	}
+	
+	cout << "Dish does not exist" << endl;
 }
 
 void RecipeBook::syncRBook()

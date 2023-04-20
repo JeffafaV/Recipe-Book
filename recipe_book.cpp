@@ -151,17 +151,59 @@ void RecipeBook::addDish(string dish, vector<string> ingrs, string desc)
 
 void RecipeBook::edtDishName(string dish, string newName)
 {
+	Dish *t = head;
 	
+	while (t != NULL)
+	{
+		if (t->dishName == dish)
+		{
+			t->dishName = newName;
+			syncRBook();
+			return;
+		}
+		
+		t = t->next;
+	}
+	
+	cout << "Dish does not exist" << endl;
 }
 
 void RecipeBook::edtDishIngr(string dish, vector<string> ingrs)
 {
+	Dish *t = head;
 	
+	while (t != NULL)
+	{
+		if (t->dishName == dish)
+		{
+			t->dishIngrs = ingrs;
+			syncRBook();
+			return;
+		}
+		
+		t = t->next;
+	}
+	
+	cout << "Dish does not exist" << endl;
 }
 
 void RecipeBook::edtDishDesc(string dish, string desc)
 {
+	Dish *t = head;
 	
+	while (t != NULL)
+	{
+		if (t->dishName == dish)
+		{
+			t->dishDesc = desc;
+			syncRBook();
+			return;
+		}
+		
+		t = t->next;
+	}
+	
+	cout << "Dish does not exist" << endl;
 }
 
 void RecipeBook::delDish(string dish)

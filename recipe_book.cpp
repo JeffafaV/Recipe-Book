@@ -285,7 +285,7 @@ void RecipeBook::syncRBook()
 	outfile.close();
 }
 
-void RecipeBook:viewDishDetails(string dish)
+void RecipeBook::viewDishDetails(string dish)
 {
 	// temp pointer used to traverse linked list
 	Dish *t = head;

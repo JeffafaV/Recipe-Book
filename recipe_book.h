@@ -16,6 +16,7 @@ class RecipeBook
 		string dishDesc;
 		Dish *next;
 		
+		Dish() {}
 		Dish(string name, vector<string> ingrs, string desc) : dishName(name), dishIngrs(ingrs), dishDesc(desc), next(NULL) {}
 	};
 	

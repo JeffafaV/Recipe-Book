@@ -38,6 +38,13 @@ RecipeBook::RecipeBook()
 			// create new dish node
 			Dish *t = new Dish;
 			
+			// when the heap is full it sets the pointer that tries to allocate memory to null
+			if (t == NULL)
+			{
+				cout << "No more memory left to store dish" << endl;
+				return;
+			}
+			
 			// used to hold string positions in order
 			// to cut string dishData into desired chunks
 			int asteriskPos;

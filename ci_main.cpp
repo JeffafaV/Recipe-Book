@@ -13,9 +13,9 @@ int main()
 	string ingr;
 	while (exit == false)
 	{
-		cout << "1 to add" << endl;
-		cout << "2 to delete" << endl;
-		cout << "3 to view" << endl;
+		cout << "1 to add ingredient" << endl;
+		cout << "2 to delete ingredient" << endl;
+		cout << "3 to view all ingredients" << endl;
 		cin >> menuChoice;
 		cin.ignore();
 		

@@ -329,3 +329,8 @@ void RecipeBook::viewAllDishes()
 		t = t->next;
 	}
 }
+
+Dish* RecipeBook::getHead()
+{
+	return head;
+}

@@ -17,6 +17,7 @@ class CurrentIngredients
 	void addCIngr(string ingr);
 	void delCIngr(string ingr);
 	void viewCIngr();
+	vector<string> getCurrIngr();
 };
 
 #endif

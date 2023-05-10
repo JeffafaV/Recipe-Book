@@ -85,3 +85,8 @@ void CurrentIngredients::syncCIngr()
 	
 	outfile.close();
 }
+
+vector<string> CurrentIngredients::getCurrIngr()
+{
+	return currIngr;
+}

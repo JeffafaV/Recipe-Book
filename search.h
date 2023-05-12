@@ -15,6 +15,8 @@ class Search
 	public:
 	Search();
 	void cookable(const CurentIngredients &ci, const RecipeBook &rb);
+	/* I might widen the scope of the Search class to show dishes 
+	that are missing a few ingredients in case if no dish is cookable */
 };
 
 #endif

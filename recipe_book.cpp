@@ -330,7 +330,7 @@ void RecipeBook::viewAllDishes()
 	}
 }
 
-Dish* RecipeBook::getHead()
+RecipeBook::Dish* RecipeBook::getHead()
 {
 	return head;
 }

@@ -8,7 +8,7 @@ using namespace std;
 
 class RecipeBook
 {
-	private:
+	public:
 	struct Dish
 	{
 		string dishName;
@@ -19,13 +19,6 @@ class RecipeBook
 		Dish() {}
 		Dish(string name, vector<string> ingrs, string desc) : dishName(name), dishIngrs(ingrs), dishDesc(desc), next(NULL) {}
 	};
-	
-	int size;
-	Dish *head;
-	Dish *tail;
-	void syncRBook();
-	
-	public:
 	RecipeBook();
 	~RecipeBook();
 	void addDish(string dish, vector<string> ingrs, string desc);
@@ -36,6 +29,12 @@ class RecipeBook
 	void viewDishDetails(string dish);
 	void viewAllDishes();
 	RecipeBook::Dish* getHead() const;
+	
+	private:
+	int size;
+	Dish *head;
+	Dish *tail;
+	void syncRBook();
 };
 
 #endif

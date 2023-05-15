@@ -12,7 +12,7 @@ Search::Search()
 void Search::cookable(const CurrentIngredients &ci, const RecipeBook &rb)
 {
 	vector<string> cIngrs = ci.getCurrIngr();
-	Dish *dish = rb.getHead();
+	RecipeBook::Dish *dish = rb.getHead();
 	
 	cout << "Cookable dishes:" << endl;
 	

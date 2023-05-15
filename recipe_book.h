@@ -35,7 +35,7 @@ class RecipeBook
 	void delDish(string dish);
 	void viewDishDetails(string dish);
 	void viewAllDishes();
-	RecipeBook::Dish* getHead();
+	RecipeBook::Dish* getHead() const;
 };
 
 #endif

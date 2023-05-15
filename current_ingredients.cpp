@@ -86,7 +86,7 @@ void CurrentIngredients::syncCIngr()
 	outfile.close();
 }
 
-vector<string> CurrentIngredients::getCurrIngr()
+vector<string> CurrentIngredients::getCurrIngr() const
 {
 	return currIngr;
 }

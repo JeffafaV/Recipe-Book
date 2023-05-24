@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	Search srch;
+	Shell sh;
 	
 	bool exit = false;
 	
@@ -24,6 +24,7 @@ int main()
 		cout << "9 to view dish details" << endl;
 		cout << "10 to view all dishes" << endl;
 		cout << "11 to search for preparable dishes" << endl;
+		int menuChoice;
 		cin >> menuChoice;
 		cin.ignore();
 		
@@ -31,57 +32,57 @@ int main()
 		{
 			case 1:
 			{
-				srch.addingCIngr();
+				sh.addingCIngr();
 				break;
 			}
 			case 2:
 			{
-				srch.deletingCIngr();
+				sh.deletingCIngr();
 				break;
 			}
 			case 3:
 			{
-				srch.viewingCIngr();
+				sh.viewingCIngr();
 				break;
 			}
 			case 4:
 			{
-				srch.addingDish();
+				sh.addingDish();
 				break;
 			}
 			case 5:
 			{
-				srch.deletingDish();
+				sh.deletingDish();
 				break;
 			}
 			case 6:
 			{
-				srch.editingDishName();
+				sh.editingDishName();
 				break;
 			}
 			case 7:
 			{
-				srch.editingDishIngr();
+				sh.editingDishIngr();
 				break;
 			}
 			case 8:
 			{
-				srch.editingDishDesc();
+				sh.editingDishDesc();
 				break;
 			}
 			case 9:
 			{
-				srch.viewingDishDetails();
+				sh.viewingDishDetails();
 				break;
 			}
 			case 10:
 			{
-				srch.viewingAllDishes();
+				sh.viewingAllDishes();
 				break;
 			}
 			case 11:
 			{
-				srch.cookableDishes();
+				sh.cookableDishes();
 				break;
 			}
 			default:

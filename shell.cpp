@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "shell.h"
 
 using namespace std;
 
@@ -52,17 +53,19 @@ void Shell::addingDish()
 	getline(cin, dish);
 	
 	string ingr;
+	cout << "Enter new ingredients one by one" << endl;
 	cout << "Enter dish ingredient. Enter quit to stop" << endl;
 	getline(cin, ingr);
 	
 	vector<string> ingrs;
-	while (ingr != "quit")
+	while (ingr != "quit") /*can probably do do while loop*/
 	{
 		ingrs.push_back(ingr);
 		cout << "Enter dish ingredient. Enter quit to stop" << endl;
 		getline(cin, ingr);
 	}
 	
+	string desc;
 	cout << "Enter dish description/recipe" << endl;
 	getline(cin, desc);
 	
@@ -96,15 +99,17 @@ void Shell::editingDishName()
 
 void Shell::editingDishIngr()
 {
+	string dish;
 	cout << "Enter dish to edit" << endl;
 	getline(cin, dish);
 	
+	string ingr;
 	cout << "Enter new ingredients one by one" << endl;
 	cout << "Enter dish ingredient. Enter quit to stop" << endl;
 	getline(cin, ingr);
 	
 	vector<string> ingrs;
-	while (ingr != "quit")
+	while (ingr != "quit") /*can probably do do while loop*/
 	{
 		ingrs.push_back(ingr);
 		cout << "Enter dish ingredient. Enter quit to stop" << endl;

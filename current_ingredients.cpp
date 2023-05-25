@@ -63,7 +63,7 @@ void CurrentIngredients::delCIngr(string ingr)
 	cout << "Ingredient doesn't exist" << endl;
 }
 
-void CurrentIngredients::viewCIngr()
+void CurrentIngredients::viewCIngr() const
 {
 	cout << "List of currently available ingredients:" << endl;
 	

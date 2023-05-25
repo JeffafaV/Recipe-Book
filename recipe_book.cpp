@@ -285,7 +285,7 @@ void RecipeBook::syncRBook()
 	outfile.close();
 }
 
-void RecipeBook::viewDishDetails(string dish)
+void RecipeBook::viewDishDetails(string dish) const
 {
 	// temp pointer used to traverse linked list
 	Dish *t = head;
@@ -316,7 +316,7 @@ void RecipeBook::viewDishDetails(string dish)
 	cout << "Dish does not exist in recipe book" << endl << endl;
 }
 
-void RecipeBook::viewAllDishes()
+void RecipeBook::viewAllDishes() const
 {
 	// used to traverse linked list
 	Dish *t = head;

@@ -4,6 +4,8 @@
 #include <algorithm>
 #include "search.h"
 
+using namespace std;
+
 Search::Search()
 {
 	

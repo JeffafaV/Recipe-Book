@@ -58,7 +58,7 @@ void Shell::addingDish()
 	getline(cin, ingr);
 	
 	vector<string> ingrs;
-	while (ingr != "quit") /*can probably do do while loop*/
+	while (ingr != "quit") /*can probably do a do while loop*/
 	{
 		ingrs.push_back(ingr);
 		cout << "Enter dish ingredient. Enter quit to stop" << endl;
@@ -109,7 +109,7 @@ void Shell::editingDishIngr()
 	getline(cin, ingr);
 	
 	vector<string> ingrs;
-	while (ingr != "quit") /*can probably do do while loop*/
+	while (ingr != "quit") /*can probably do a do while loop*/
 	{
 		ingrs.push_back(ingr);
 		cout << "Enter dish ingredient. Enter quit to stop" << endl;
